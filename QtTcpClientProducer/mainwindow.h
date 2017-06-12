@@ -76,9 +76,6 @@ private:
   int timing=1000;
   QTimer *t;
 
-  int test1;
-  int test2;
-  int test3;
 };
 
 #endif // MAINWINDOW_H
