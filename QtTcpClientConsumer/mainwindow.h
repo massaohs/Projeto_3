@@ -5,15 +5,10 @@
 #include <QTcpSocket>
 #include <QDebug>
 #include <QTimer>
-//#include <data.h>
+#include <data.h>
 #include <vector>
 #include <QList>
-
-struct Data{
-    long int tempo;
-    int valor;
-};
-
+#include <QListWidgetItem>
 
 namespace Ui {
 class MainWindow;
@@ -35,6 +30,7 @@ public slots:
   void changeTiming(int _timing);
   void setRunOFF();
   void setRunON();
+  void getIPs();
 
 
 private:
@@ -43,7 +39,6 @@ private:
   QTimer *t;
   int timing=1000;
   std::vector<Data> dados;
-
 };
 
 #endif // MAINWINDOW_H

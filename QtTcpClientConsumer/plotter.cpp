@@ -3,4 +3,10 @@
 Plotter::Plotter(QWidget *parent) :
     QWidget(parent)
 {
+
 }
+
+
+
+
+//ui->listWidget->selectedItems()

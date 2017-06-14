@@ -1,10 +1,12 @@
 #ifndef DATA_H
 #define DATA_H
+#include <QDateTime>
+
 
 class Data
 {    
 public:
-    long int tempo;
+    qint64 tempo;
     int valor;
 
     Data();

@@ -5,7 +5,7 @@
 #include <iostream>
 #include <QList>
 #include <vector>
-//#include <data.h>
+#include <data.h>
 
 
 
@@ -34,6 +34,11 @@ MainWindow::MainWindow(QWidget *parent) :
           SIGNAL(clicked(bool)),
           this,
           SLOT(getData()));
+  connect(ui->PBupdate,
+          SIGNAL(clicked(bool)),
+          this,
+          SLOT(getIPs()));
+
 }
 
 void MainWindow::tcpConnect(){
@@ -46,8 +51,10 @@ void MainWindow::tcpConnect(){
   }
 }
 
+
+
 void MainWindow::tcpDisconnect()
-{
+{    
     socket->disconnectFromHost();
     if(!socket->waitForConnected(3000)){
         qDebug() << "Disconnected";
@@ -79,7 +86,7 @@ void MainWindow::changeTiming(int _timing)
 }
 
 void MainWindow::getData(){
-  QString str;
+  QString str, comandoGet;
   QByteArray array;
   QStringList list;
   qint64 thetime;
@@ -89,16 +96,17 @@ void MainWindow::getData(){
   if(socket->state() == QAbstractSocket::ConnectedState){
     if(socket->isOpen()){
       qDebug() << "reading...";
-      socket->write("get 127.0.0.1 30\r\n");
+      comandoGet = "get "+ ui->listWidget->currentItem()->text() +"\r\n";
+      socket->write(comandoGet.toStdString().c_str());
       socket->waitForBytesWritten();
       socket->waitForReadyRead();
       qDebug() << socket->bytesAvailable();
       int i;
-      if(dados.size()>=100){
-          moldaVector(dados);
-      }
       qDebug() << "Teste: " << endl << i << endl;
       while(socket->bytesAvailable()){
+        if(dados.size()>=100){
+            moldaVector(dados);
+        }
         i=dados.size();
         str = socket->readLine().replace("\n","").replace("\r","");
         linha = str.split(" ");
@@ -125,6 +133,22 @@ void MainWindow::getData(){
   }
 }
 
+void MainWindow::getIPs(){
+    QStringList IPs;
+    if(socket->state() == QAbstractSocket::ConnectedState){
+      if(socket->isOpen()){
+          socket->write("list");
+          socket->waitForBytesWritten();
+          socket->waitForReadyRead();
+
+          while(socket->bytesAvailable()){
+              IPs.append(socket->readLine().replace("\n","").replace("\r",""));
+          }
+
+          ui->listWidget->addItems(IPs);
+      }
+    }
+}
 
 void MainWindow::moldaVector(std::vector<Data> dados){
     int k = dados.size()-1;
@@ -140,3 +164,5 @@ MainWindow::~MainWindow()
   delete socket;
   delete ui;
 }
+
+
