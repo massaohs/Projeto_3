@@ -8,5 +8,3 @@ Plotter::Plotter(QWidget *parent) :
 
 
 
-
-//ui->listWidget->selectedItems()

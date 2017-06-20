@@ -96,7 +96,10 @@ void MainWindow::getData(){
   if(socket->state() == QAbstractSocket::ConnectedState){
     if(socket->isOpen()){
       qDebug() << "reading...";
-      comandoGet = "get "+ ui->listWidget->currentItem()->text() +"\r\n";
+      qDebug() << "TESTANDO: " << ui->listWidget->currentItem()->text().replace("\"", "") << endl;
+      comandoGet = "get "+ ui->listWidget->currentItem()->text() + " 30\r\n";
+
+
       socket->write(comandoGet.toStdString().c_str());
       socket->waitForBytesWritten();
       socket->waitForReadyRead();
