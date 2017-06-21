@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
   socket = new QTcpSocket(this);
   t = new QTimer(this);
 
+  ui->widgetPlotter->setDados(dados);
 
   connect(ui->PB_Connect,
           SIGNAL(clicked(bool)),
@@ -29,14 +30,27 @@ MainWindow::MainWindow(QWidget *parent) :
           SIGNAL(valueChanged(int)),
           this,
           SLOT(changeTiming(int)));
-  connect(ui->pushButtonGet,
-          SIGNAL(clicked(bool)),
+  connect(t,
+          SIGNAL(timeout()),
           this,
           SLOT(getData()));
   connect(ui->PBupdate,
           SIGNAL(clicked(bool)),
           this,
           SLOT(getIPs()));
+  connect(ui->PB_Start,
+          SIGNAL(clicked(bool)),
+          this,
+          SLOT(setRunON()));
+  connect(ui->PB_Stop,
+          SIGNAL(clicked(bool)),
+          this,
+          SLOT(setRunOFF()));
+  connect(ui->listWidget,
+          SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
+          this,
+          SLOT(IP_ON()));
+
 
 }
 
@@ -63,6 +77,10 @@ void MainWindow::tcpDisconnect()
     }
 }
 
+
+void MainWindow::IP_ON(){
+    ipSelecionado = true;
+}
 
 void MainWindow::setRunON()
 {
@@ -94,35 +112,40 @@ void MainWindow::getData(){
   qDebug() << "to get data...";
   if(socket->state() == QAbstractSocket::ConnectedState){
     if(socket->isOpen()){
-      qDebug() << "reading...";
-      qDebug() << "TESTANDO: " << ui->listWidget->currentItem()->text().replace("\"", "") << endl;
-      comandoGet = "get "+ ui->listWidget->currentItem()->text() + " 30\r\n";
-
-
-      socket->write(comandoGet.toStdString().c_str());
-      socket->waitForBytesWritten();
-      socket->waitForReadyRead();
-      qDebug() << socket->bytesAvailable();
-      int i=0;
-      dados.clear();
-      while(socket->bytesAvailable()){
-        str = socket->readLine().replace("\n","").replace("\r","");
-        linha = str.split(" ");
-        dados.push_back(Data());
-        dados[i].valor = linha[1].toInt();
-        dados[i].tempo = linha[0].toLongLong();
-
-        list = str.split(" ");
-        if(list.size() == 2){
-          bool ok;
-          str = list.at(0);
-          thetime = str.toLongLong(&ok);
-          str = list.at(1);
-          qDebug() << thetime << ": " << str;
+        if(ipSelecionado == false){
+            qDebug() << "Nenhum ip selecionado!";
         }
-        i++;
-      }
-      ui->widgetPlotter->setDados(dados);
+        else{
+          qDebug() << "reading...";
+          qDebug() << "TESTANDO: " << ui->listWidget->currentItem()->text().replace("\"", "") << endl;
+          comandoGet = "get "+ ui->listWidget->currentItem()->text() + " 30\r\n";
+
+
+          socket->write(comandoGet.toStdString().c_str());
+          socket->waitForBytesWritten();
+          socket->waitForReadyRead();
+          qDebug() << socket->bytesAvailable();
+          int i=0;
+          dados.clear();
+          while(socket->bytesAvailable()){
+            str = socket->readLine().replace("\n","").replace("\r","");
+            linha = str.split(" ");
+            dados.push_back(Data());
+            dados[i].valor = linha[1].toInt();
+            dados[i].tempo = linha[0].toLongLong();
+
+            list = str.split(" ");
+            if(list.size() == 2){
+              bool ok;
+              str = list.at(0);
+              thetime = str.toLongLong(&ok);
+              str = list.at(1);
+              qDebug() << thetime << ": " << str;
+            }
+            i++;
+          }
+          ui->widgetPlotter->setDados(dados);
+        }
     }
   }
 }
@@ -138,7 +161,7 @@ void MainWindow::getIPs(){
           while(socket->bytesAvailable()){
               IPs.append(socket->readLine().replace("\n","").replace("\r",""));
           }
-
+          ui->listWidget->clear();
           ui->listWidget->addItems(IPs);
       }
     }

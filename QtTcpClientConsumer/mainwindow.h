@@ -32,7 +32,7 @@ public slots:
   void setRunOFF();
   void setRunON();
   void getIPs();
-
+  void IP_ON();
 
 private:
   Ui::MainWindow *ui;
@@ -40,6 +40,7 @@ private:
   QTimer *t;
   int timing=1000;
   std::vector<Data> dados;
+  bool ipSelecionado = false;
 };
 
 #endif // MAINWINDOW_H
