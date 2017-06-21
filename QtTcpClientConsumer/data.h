@@ -10,9 +10,6 @@ public:
     int valor;
 
     Data();
-
-
-
 };
 
 #endif // DATA_H

@@ -104,24 +104,14 @@ void MainWindow::getData(){
       socket->waitForBytesWritten();
       socket->waitForReadyRead();
       qDebug() << socket->bytesAvailable();
-      int i;
-      qDebug() << "Teste: " << endl << i << endl;
+      int i=0;
+      dados.clear();
       while(socket->bytesAvailable()){
-        if(dados.size()>=100){
-            moldaVector(dados);
-        }
-        i=dados.size();
         str = socket->readLine().replace("\n","").replace("\r","");
         linha = str.split(" ");
         dados.push_back(Data());
         dados[i].valor = linha[1].toInt();
         dados[i].tempo = linha[0].toLong();
-
-        qDebug()<< "Teste : " << dados[i].tempo << endl;
-        qDebug() << dados.size() << "  " << i << endl;
-
-
-
 
         list = str.split(" ");
         if(list.size() == 2){
@@ -131,6 +121,8 @@ void MainWindow::getData(){
           str = list.at(1);
           qDebug() << thetime << ": " << str;
         }
+        ui->widgetPlotter->setDados(dados);
+        i++;
       }
     }
   }

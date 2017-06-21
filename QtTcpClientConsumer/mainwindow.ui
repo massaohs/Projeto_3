@@ -19,6 +19,13 @@
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <layout class="QGridLayout" name="gridLayout">
+        <item row="4" column="1">
+         <widget class="QPushButton" name="PB_Disconnect">
+          <property name="text">
+           <string>Disconnect</string>
+          </property>
+         </widget>
+        </item>
         <item row="7" column="0">
          <widget class="QLabel" name="label">
           <property name="text">
@@ -33,10 +40,10 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
-         <widget class="QPushButton" name="PB_Disconnect">
+        <item row="2" column="0" colspan="2">
+         <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>Disconnect</string>
+           <string>IP do servidor</string>
           </property>
          </widget>
         </item>
@@ -50,31 +57,17 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0" colspan="2">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>IP do servidor</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="0">
+        <item row="10" column="0">
          <widget class="QPushButton" name="PB_Start">
           <property name="text">
            <string>Start</string>
           </property>
          </widget>
         </item>
-        <item row="9" column="1">
+        <item row="10" column="1">
          <widget class="QPushButton" name="PB_Stop">
           <property name="text">
            <string>Stop</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0" colspan="2">
-         <widget class="QLineEdit" name="textIP">
-          <property name="text">
-           <string>127.0.0.1</string>
           </property>
          </widget>
         </item>
@@ -96,24 +89,24 @@
           </item>
          </layout>
         </item>
+        <item row="3" column="0" colspan="2">
+         <widget class="QLineEdit" name="textIP">
+          <property name="text">
+           <string>127.0.0.1</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="1">
+         <widget class="QPushButton" name="pushButtonGet">
+          <property name="text">
+           <string>getData</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
-       <widget class="Plotter" name="widgetPlotter" native="true">
-        <widget class="QPushButton" name="pushButtonGet">
-         <property name="geometry">
-          <rect>
-           <x>160</x>
-           <y>110</y>
-           <width>101</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>getData</string>
-         </property>
-        </widget>
-       </widget>
+       <widget class="Plotter" name="widgetPlotter" native="true"/>
       </item>
      </layout>
     </item>
@@ -125,7 +118,7 @@
      <x>0</x>
      <y>0</y>
      <width>643</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
