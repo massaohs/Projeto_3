@@ -2,6 +2,7 @@
 #include <QPainter>
 #include <QPen>
 #include <QBrush>
+#include <QDebug>
 
 Plotter::Plotter(QWidget *parent) :
     QWidget(parent)
@@ -49,27 +50,31 @@ void Plotter::paintEvent(QPaintEvent *e){
       p.setBrush(brush);
       p.drawRect(0,0,width(),height());
       // (x1,y1) -> (x2,y2)
-      pen.setColor(QColor(255,255,255));
+      pen.setColor(QColor(50,50,50));
       p.setPen(pen);
       // desenha a linha do eixo de coordenadas
       //p.drawLine(0,height()/2,width(),height()/2);
 
 
       int tam = dataOutput.size();
-      qint64 tempoTotal = (*dataOutput.end()).tempo - (*dataOutput.begin()).tempo;
+      qint64 tempoTotal = (*(dataOutput.end()-1)).tempo - (*dataOutput.begin()).tempo;
       tempoTotal /= 1000;
-      qint64 escalaX = width()/(tempoTotal);
+      float escalaX = width()/(tempoTotal);
+      escalaX = (width()/(escalaX*tempoTotal)) * escalaX;
+      qDebug() << "VALOR CORRETO : " << width() << endl;
+      qDebug() << "VALOR QUE CALCULEI : " << escalaX * tempoTotal << endl;
+
       qint64 escalaY = height()/100;
       std::vector<Data>::iterator it;
 
       qint64 t1 = 0, t2;
       int v1=(*dataOutput.begin()).valor, v2;
 
-      for(it = dataOutput.begin(); it<dataOutput.end(); it++){
-        t2 = ((*(it+1)).tempo - (*dataOutput.begin()).tempo)/1000;
-        v2 = (*(it+1)).valor;
-
-        p.drawLine(t1*escalaX, v1*escalaY, t2*escalaX, v2*escalaY);
+      for(it = dataOutput.begin()+1; it!=dataOutput.end(); it++){
+        t2 = ((*it).tempo - (*dataOutput.begin()).tempo)/1000;
+        v2 = (*it).valor;
+        qDebug() << "INFOS: " << t1 << " " << v1 << " " << t2 << " " << v2 << endl;
+        p.drawLine(t1*escalaX, height()-(v1*escalaY), t2*escalaX, height() - (v2*escalaY));
 
         t1 = t2;
         v1 = v2;

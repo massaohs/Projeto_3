@@ -110,7 +110,7 @@ void MainWindow::getData(){
         linha = str.split(" ");
         dados.push_back(Data());
         dados[i].valor = linha[1].toInt();
-        dados[i].tempo = linha[0].toLong();
+        dados[i].tempo = linha[0].toLongLong();
 
         list = str.split(" ");
         if(list.size() == 2){
