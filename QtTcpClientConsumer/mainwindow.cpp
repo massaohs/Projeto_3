@@ -5,7 +5,6 @@
 #include <iostream>
 #include <QList>
 #include <vector>
-#include <data.h>
 
 
 
@@ -121,9 +120,9 @@ void MainWindow::getData(){
           str = list.at(1);
           qDebug() << thetime << ": " << str;
         }
-        ui->widgetPlotter->setDados(dados);
         i++;
       }
+      ui->widgetPlotter->setDados(dados);
     }
   }
 }

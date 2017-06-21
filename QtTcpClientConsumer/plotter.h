@@ -12,7 +12,7 @@ private:
 public:
     explicit Plotter(QWidget *parent = 0);
     void setDados(std::vector<Data> dados);
-
+    void paintEvent(QPaintEvent *e);
 
 signals:
 

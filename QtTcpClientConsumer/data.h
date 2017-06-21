@@ -2,14 +2,9 @@
 #define DATA_H
 #include <QDateTime>
 
-
-class Data
-{    
-public:
+struct Data{
     qint64 tempo;
     int valor;
-
-    Data();
 };
 
 #endif // DATA_H

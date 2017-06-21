@@ -15,8 +15,7 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    plotter.cpp \
-    data.cpp
+    plotter.cpp
 
 HEADERS  += mainwindow.h \
     plotter.h \

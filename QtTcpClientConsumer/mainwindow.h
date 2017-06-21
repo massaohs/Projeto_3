@@ -5,10 +5,11 @@
 #include <QTcpSocket>
 #include <QDebug>
 #include <QTimer>
-#include <data.h>
+#include "data.h"
 #include <vector>
 #include <QList>
 #include <QListWidgetItem>
+#include "plotter.h"
 
 namespace Ui {
 class MainWindow;

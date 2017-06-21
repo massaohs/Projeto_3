@@ -38,20 +38,20 @@ public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QGridLayout *gridLayout;
+    QPushButton *PB_Disconnect;
     QLabel *label;
     QPushButton *PB_Connect;
-    QPushButton *PB_Disconnect;
+    QLabel *label_2;
     QListWidget *listWidget;
     QPushButton *PBupdate;
-    QLabel *label_2;
     QPushButton *PB_Start;
     QPushButton *PB_Stop;
-    QLineEdit *textIP;
     QHBoxLayout *horizontalLayout_2;
     QSlider *sliderTiming;
     QLabel *textTiming;
-    Plotter *widgetPlotter;
+    QLineEdit *textIP;
     QPushButton *pushButtonGet;
+    Plotter *widgetPlotter;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -73,6 +73,11 @@ public:
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(6);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        PB_Disconnect = new QPushButton(centralWidget);
+        PB_Disconnect->setObjectName(QStringLiteral("PB_Disconnect"));
+
+        gridLayout->addWidget(PB_Disconnect, 4, 1, 1, 1);
+
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
 
@@ -83,10 +88,10 @@ public:
 
         gridLayout->addWidget(PB_Connect, 4, 0, 1, 1);
 
-        PB_Disconnect = new QPushButton(centralWidget);
-        PB_Disconnect->setObjectName(QStringLiteral("PB_Disconnect"));
+        label_2 = new QLabel(centralWidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
 
-        gridLayout->addWidget(PB_Disconnect, 4, 1, 1, 1);
+        gridLayout->addWidget(label_2, 2, 0, 1, 2);
 
         listWidget = new QListWidget(centralWidget);
         listWidget->setObjectName(QStringLiteral("listWidget"));
@@ -98,25 +103,15 @@ public:
 
         gridLayout->addWidget(PBupdate, 6, 1, 1, 1);
 
-        label_2 = new QLabel(centralWidget);
-        label_2->setObjectName(QStringLiteral("label_2"));
-
-        gridLayout->addWidget(label_2, 2, 0, 1, 2);
-
         PB_Start = new QPushButton(centralWidget);
         PB_Start->setObjectName(QStringLiteral("PB_Start"));
 
-        gridLayout->addWidget(PB_Start, 9, 0, 1, 1);
+        gridLayout->addWidget(PB_Start, 10, 0, 1, 1);
 
         PB_Stop = new QPushButton(centralWidget);
         PB_Stop->setObjectName(QStringLiteral("PB_Stop"));
 
-        gridLayout->addWidget(PB_Stop, 9, 1, 1, 1);
-
-        textIP = new QLineEdit(centralWidget);
-        textIP->setObjectName(QStringLiteral("textIP"));
-
-        gridLayout->addWidget(textIP, 3, 0, 1, 2);
+        gridLayout->addWidget(PB_Stop, 10, 1, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
@@ -135,14 +130,21 @@ public:
 
         gridLayout->addLayout(horizontalLayout_2, 8, 0, 1, 2);
 
+        textIP = new QLineEdit(centralWidget);
+        textIP->setObjectName(QStringLiteral("textIP"));
+
+        gridLayout->addWidget(textIP, 3, 0, 1, 2);
+
+        pushButtonGet = new QPushButton(centralWidget);
+        pushButtonGet->setObjectName(QStringLiteral("pushButtonGet"));
+
+        gridLayout->addWidget(pushButtonGet, 9, 1, 1, 1);
+
 
         horizontalLayout->addLayout(gridLayout);
 
         widgetPlotter = new Plotter(centralWidget);
         widgetPlotter->setObjectName(QStringLiteral("widgetPlotter"));
-        pushButtonGet = new QPushButton(widgetPlotter);
-        pushButtonGet->setObjectName(QStringLiteral("pushButtonGet"));
-        pushButtonGet->setGeometry(QRect(160, 110, 101, 29));
 
         horizontalLayout->addWidget(widgetPlotter);
 
@@ -152,7 +154,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 643, 25));
+        menuBar->setGeometry(QRect(0, 0, 643, 21));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -169,15 +171,15 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        PB_Disconnect->setText(QApplication::translate("MainWindow", "Disconnect", 0));
         label->setText(QApplication::translate("MainWindow", "Timing", 0));
         PB_Connect->setText(QApplication::translate("MainWindow", "Connect", 0));
-        PB_Disconnect->setText(QApplication::translate("MainWindow", "Disconnect", 0));
-        PBupdate->setText(QApplication::translate("MainWindow", "Update", 0));
         label_2->setText(QApplication::translate("MainWindow", "IP do servidor", 0));
+        PBupdate->setText(QApplication::translate("MainWindow", "Update", 0));
         PB_Start->setText(QApplication::translate("MainWindow", "Start", 0));
         PB_Stop->setText(QApplication::translate("MainWindow", "Stop", 0));
-        textIP->setText(QApplication::translate("MainWindow", "127.0.0.1", 0));
         textTiming->setText(QApplication::translate("MainWindow", "1", 0));
+        textIP->setText(QApplication::translate("MainWindow", "127.0.0.1", 0));
         pushButtonGet->setText(QApplication::translate("MainWindow", "getData", 0));
     } // retranslateUi
 
