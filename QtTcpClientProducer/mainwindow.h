@@ -61,6 +61,9 @@ private:
    * @brief ui Cria um objeto de interface gráfica.
    */
   Ui::MainWindow *ui;
+  /**
+   * @brief socket Estabelece a comunicação com o servidor remóto
+   */
   QTcpSocket *socket;
   /**
    * @brief min É uma variável que receberá o valor do slider respctivo.
@@ -75,6 +78,7 @@ private:
    */
   int timing=1000;
   QTimer *t;
+  int test;
 
 };
 
