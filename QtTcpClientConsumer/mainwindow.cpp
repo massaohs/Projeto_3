@@ -80,10 +80,6 @@ void MainWindow::tcpDisconnect()
 
 void MainWindow::IP_ON(){
     ipSelecionado = true;
-    Plotter a;
-    a.test2;
-    a.test3;
-    a.test4;
 }
 
 void MainWindow::setRunON()

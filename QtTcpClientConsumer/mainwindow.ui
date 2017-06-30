@@ -96,13 +96,6 @@
           </property>
          </widget>
         </item>
-        <item row="9" column="1">
-         <widget class="QPushButton" name="pushButtonGet">
-          <property name="text">
-           <string>getData</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
       <item>
