@@ -78,7 +78,6 @@ private:
    */
   int timing=1000;
   QTimer *t;
-  int test;
 
 };
 

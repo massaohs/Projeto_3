@@ -25,9 +25,6 @@ public:
      * @brief paintEvent É um slot que define como sera pintado os dados e o que sera usado para pintar 
      */
     void paintEvent(QPaintEvent *e);
-    int test2;
-    int test3;
-    int test4;
 
 signals:
 
